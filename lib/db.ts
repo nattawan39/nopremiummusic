@@ -1,5 +1,4 @@
-import Database from 'better-sqlite3'
-import { getDbPath } from './paths'
+import { neon } from '@neondatabase/serverless'
 
 export interface Track {
   id: number
@@ -7,30 +6,33 @@ export interface Track {
   artist: string
   genre: string
   year: number
-  audio_filename: string
-  cover_filename: string
+  audio_url: string
+  cover_url: string
   duration: number
   created_at: string
 }
 
-let db: Database.Database | null = null
+export function getSql() {
+  return neon(process.env.DATABASE_URL!)
+}
 
-export function getDb(): Database.Database {
-  if (!db) {
-    db = new Database(getDbPath())
-    db.exec(`
-      CREATE TABLE IF NOT EXISTS tracks (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        artist TEXT NOT NULL,
-        genre TEXT DEFAULT '',
-        year INTEGER DEFAULT 0,
-        audio_filename TEXT NOT NULL,
-        cover_filename TEXT DEFAULT '',
-        duration INTEGER DEFAULT 0,
-        created_at TEXT DEFAULT (datetime('now'))
-      )
-    `)
-  }
-  return db
+let tableReady = false
+
+export async function ensureTable() {
+  if (tableReady) return
+  const sql = getSql()
+  await sql`
+    CREATE TABLE IF NOT EXISTS tracks (
+      id SERIAL PRIMARY KEY,
+      title TEXT NOT NULL,
+      artist TEXT NOT NULL,
+      genre TEXT DEFAULT '',
+      year INTEGER DEFAULT 0,
+      audio_url TEXT NOT NULL,
+      cover_url TEXT DEFAULT '',
+      duration INTEGER DEFAULT 0,
+      created_at TIMESTAMP DEFAULT NOW()
+    )
+  `
+  tableReady = true
 }

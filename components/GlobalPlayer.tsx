@@ -64,9 +64,7 @@ export default function GlobalPlayer() {
   if (!currentTrack) return null
 
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0
-  const coverSrc = currentTrack.cover_filename
-    ? `/api/covers/${currentTrack.cover_filename}`
-    : null
+  const coverSrc = currentTrack.cover_url || null
 
   return (
     <>

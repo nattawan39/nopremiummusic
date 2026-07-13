@@ -1,7 +1,9 @@
-import { getDb } from '@/lib/db'
+import { getSql, ensureTable } from '@/lib/db'
+import type { Track } from '@/lib/db'
 
-export function GET() {
-  const db = getDb()
-  const tracks = db.prepare('SELECT * FROM tracks ORDER BY created_at DESC').all()
-  return Response.json(tracks)
+export async function GET() {
+  await ensureTable()
+  const sql = getSql()
+  const rows = await sql`SELECT * FROM tracks ORDER BY created_at DESC`
+  return Response.json(rows as Track[])
 }

@@ -13,9 +13,7 @@ function dispatchPlayTrack(track: Track) {
 }
 
 export default function TrackCard({ track }: { track: Track }) {
-  const coverSrc = track.cover_filename
-    ? `/api/covers/${track.cover_filename}`
-    : null
+  const coverSrc = track.cover_url || null
 
   return (
     <div
