@@ -27,8 +27,8 @@ input, select, textarea, button {
 }
 
 ::selection {
-  background: var(--green);
-  color: #000;
+  background: #0300ad;
+  color: #ffffff;
 }
 
 ::-webkit-scrollbar { width: 6px; }
