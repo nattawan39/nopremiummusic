@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local data
+musik.db
+public/uploads/audio/*
+!public/uploads/audio/.gitkeep
+public/uploads/covers/*
+!public/uploads/covers/.gitkeep
