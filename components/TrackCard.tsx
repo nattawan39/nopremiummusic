@@ -22,7 +22,7 @@ export default function TrackCard({ track, index }: { track: Track; index: numbe
       alignItems: 'center',
       gap: 16,
       padding: '12px 0',
-      borderBottom: '1px solid #ccc8c2',
+      borderBottom: '1px solid #a0a0a0',
       fontFamily: "'Courier New', Courier, monospace",
     }}>
       {/* Index */}
@@ -31,9 +31,9 @@ export default function TrackCard({ track, index }: { track: Track; index: numbe
       {/* Cover */}
       <div style={{
         width: 48, height: 48,
-        border: '1px solid #ccc8c2',
+        border: '1px solid #a0a0a0',
         flexShrink: 0,
-        backgroundColor: '#e4dfd8',
+        backgroundColor: '#b0b0b0',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         overflow: 'hidden',
       }}>
@@ -62,8 +62,8 @@ export default function TrackCard({ track, index }: { track: Track; index: numbe
           onClick={() => dispatchPlayTrack(track)}
           style={{
             background: 'none',
-            border: '1px solid #ccc8c2',
-            color: '#e8401c',
+            border: '1px solid #a0a0a0',
+            color: '#0300ad',
             cursor: 'pointer',
             fontSize: 13,
             padding: '6px 12px',

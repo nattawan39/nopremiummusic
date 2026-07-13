@@ -7,8 +7,8 @@ const inputStyle: React.CSSProperties = {
   display: 'block',
   width: '100%',
   padding: '10px 12px',
-  border: '1px solid #ccc8c2',
-  backgroundColor: '#e4dfd8',
+  border: '1px solid #a0a0a0',
+  backgroundColor: '#b0b0b0',
   color: '#1a1a1a',
   fontSize: 13,
   outline: 'none',
@@ -53,23 +53,23 @@ export default function AdminPage() {
 
   return (
     <main style={{ maxWidth: 600, margin: '0 auto', padding: '40px 24px' }}>
-      <div style={{ borderBottom: '1px solid #ccc8c2', paddingBottom: 24, marginBottom: 40 }}>
+      <div style={{ borderBottom: '1px solid #a0a0a0', paddingBottom: 24, marginBottom: 40 }}>
         <div style={{ color: '#888888', fontSize: 12, marginBottom: 8 }}>$ upload new file</div>
         <h1 style={{
           fontSize: 'clamp(2.5rem, 8vw, 5rem)',
           fontWeight: 700,
           lineHeight: 1,
           margin: 0,
-          color: '#e8401c',
+          color: '#0300ad',
         }}>
           UPLOAD
         </h1>
       </div>
 
       {success && (
-        <div style={{ border: '1px solid #e8401c', color: '#e8401c', padding: '10px 14px', marginBottom: 24, fontSize: 12 }}>
+        <div style={{ border: '1px solid #0300ad', color: '#0300ad', padding: '10px 14px', marginBottom: 24, fontSize: 12 }}>
           {'>'} track uploaded.{' '}
-          <Link href="/" style={{ color: '#e8401c', textDecoration: 'underline' }}>view archive</Link>
+          <Link href="/" style={{ color: '#0300ad', textDecoration: 'underline' }}>view archive</Link>
         </div>
       )}
 
@@ -113,8 +113,8 @@ export default function AdminPage() {
             width: '100%',
             padding: '12px',
             backgroundColor: 'transparent',
-            color: uploading ? '#888888' : '#e8401c',
-            border: `1px solid ${uploading ? '#ccc8c2' : '#e8401c'}`,
+            color: uploading ? '#888888' : '#0300ad',
+            border: `1px solid ${uploading ? '#a0a0a0' : '#0300ad'}`,
             cursor: uploading ? 'not-allowed' : 'pointer',
             fontSize: 13,
             letterSpacing: '0.05em',

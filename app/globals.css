@@ -5,12 +5,12 @@
 }
 
 :root {
-  --bg: #ede9e3;
-  --surface: #e4dfd8;
-  --border: #ccc8c2;
+  --bg: #bbbbbb;
+  --surface: #b0b0b0;
+  --border: #a0a0a0;
   --text: #1a1a1a;
   --muted: #888888;
-  --green: #e8401c;
+  --green: #0300ad;
   --red: #c0392b;
 }
 

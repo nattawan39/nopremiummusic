@@ -18,17 +18,17 @@ export default function HomePage() {
 
   return (
     <main style={{ maxWidth: 860, margin: '0 auto', padding: '40px 24px' }}>
-      <div style={{ borderBottom: '1px solid #ccc8c2', paddingBottom: 24, marginBottom: 32 }}>
+      <div style={{ borderBottom: '1px solid #a0a0a0', paddingBottom: 24, marginBottom: 32 }}>
         <div style={{ color: '#888888', fontSize: 12, marginBottom: 8 }}>$ ls -la ~/music</div>
         <h1 style={{
-          fontSize: 'clamp(3rem, 10vw, 6rem)',
+          fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
           fontWeight: 700,
-          lineHeight: 1.05,
+          lineHeight: 1.2,
           margin: 0,
-          color: '#e8401c',
+          color: '#0300ad',
           letterSpacing: '-0.01em',
         }}>
-          NO<br />PREMIUM<br />MUSIC
+          NO PREMIUM MUSIC
         </h1>
         {!loading && (
           <div style={{ fontSize: 12, color: '#888888', marginTop: 12 }}>
@@ -38,7 +38,7 @@ export default function HomePage() {
       </div>
 
       {loading ? (
-        <div style={{ color: '#888888', fontSize: 13 }}>loading<span style={{ color: '#e8401c' }}>_</span></div>
+        <div style={{ color: '#888888', fontSize: 13 }}>loading<span style={{ color: '#0300ad' }}>_</span></div>
       ) : tracks.length === 0 ? (
         <div style={{ padding: '32px 0' }}>
           <div style={{ color: '#888888', fontSize: 13, marginBottom: 16 }}>
@@ -46,8 +46,8 @@ export default function HomePage() {
           </div>
           <Link href="/admin" style={{
             display: 'inline-block',
-            border: '1px solid #ccc8c2',
-            color: '#e8401c',
+            border: '1px solid #a0a0a0',
+            color: '#0300ad',
             padding: '10px 20px',
             textDecoration: 'none',
             fontSize: 13,
