@@ -22,18 +22,18 @@ export default function TrackCard({ track, index }: { track: Track; index: numbe
       alignItems: 'center',
       gap: 16,
       padding: '12px 0',
-      borderBottom: '1px solid #cccccc',
+      borderBottom: '1px solid #ccc8c2',
       fontFamily: "'Courier New', Courier, monospace",
     }}>
       {/* Index */}
-      <div style={{ color: '#6b7280', fontSize: 12, flexShrink: 0, width: 32 }}>{num}</div>
+      <div style={{ color: '#888888', fontSize: 12, flexShrink: 0, width: 32 }}>{num}</div>
 
       {/* Cover */}
       <div style={{
         width: 48, height: 48,
-        border: '1px solid #cccccc',
+        border: '1px solid #ccc8c2',
         flexShrink: 0,
-        backgroundColor: '#e8e8e8',
+        backgroundColor: '#e4dfd8',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         overflow: 'hidden',
       }}>
@@ -45,10 +45,10 @@ export default function TrackCard({ track, index }: { track: Track; index: numbe
 
       {/* Info */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 13, color: '#1e3a8a', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div style={{ fontSize: 13, color: '#1a1a1a', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {track.title}
         </div>
-        <div style={{ fontSize: 12, color: '#6b7280', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div style={{ fontSize: 12, color: '#888888', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {track.artist}{track.genre ? ` · ${track.genre}` : ''}{track.year > 0 ? ` · ${track.year}` : ''}
         </div>
       </div>
@@ -56,14 +56,14 @@ export default function TrackCard({ track, index }: { track: Track; index: numbe
       {/* Duration + Play */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
         {track.duration > 0 && (
-          <span style={{ fontSize: 12, color: '#6b7280' }}>{formatTime(track.duration)}</span>
+          <span style={{ fontSize: 12, color: '#888888' }}>{formatTime(track.duration)}</span>
         )}
         <button
           onClick={() => dispatchPlayTrack(track)}
           style={{
             background: 'none',
-            border: '1px solid #cccccc',
-            color: '#2563eb',
+            border: '1px solid #ccc8c2',
+            color: '#e8401c',
             cursor: 'pointer',
             fontSize: 13,
             padding: '6px 12px',

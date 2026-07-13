@@ -7,9 +7,9 @@ const inputStyle: React.CSSProperties = {
   display: 'block',
   width: '100%',
   padding: '10px 12px',
-  border: '1px solid #cccccc',
-  backgroundColor: '#e8e8e8',
-  color: '#1e3a8a',
+  border: '1px solid #ccc8c2',
+  backgroundColor: '#e4dfd8',
+  color: '#1a1a1a',
   fontSize: 13,
   outline: 'none',
   marginBottom: 16,
@@ -18,7 +18,7 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   display: 'block',
   fontSize: 11,
-  color: '#6b7280',
+  color: '#888888',
   marginBottom: 6,
   letterSpacing: '0.05em',
 }
@@ -53,28 +53,28 @@ export default function AdminPage() {
 
   return (
     <main style={{ maxWidth: 600, margin: '0 auto', padding: '40px 24px' }}>
-      <div style={{ borderBottom: '1px solid #cccccc', paddingBottom: 24, marginBottom: 40 }}>
-        <div style={{ color: '#6b7280', fontSize: 12, marginBottom: 8 }}>$ upload new file</div>
+      <div style={{ borderBottom: '1px solid #ccc8c2', paddingBottom: 24, marginBottom: 40 }}>
+        <div style={{ color: '#888888', fontSize: 12, marginBottom: 8 }}>$ upload new file</div>
         <h1 style={{
           fontSize: 'clamp(2.5rem, 8vw, 5rem)',
           fontWeight: 700,
           lineHeight: 1,
           margin: 0,
-          color: '#2563eb',
+          color: '#e8401c',
         }}>
           UPLOAD
         </h1>
       </div>
 
       {success && (
-        <div style={{ border: '1px solid #2563eb', color: '#2563eb', padding: '10px 14px', marginBottom: 24, fontSize: 12 }}>
+        <div style={{ border: '1px solid #e8401c', color: '#e8401c', padding: '10px 14px', marginBottom: 24, fontSize: 12 }}>
           {'>'} track uploaded.{' '}
-          <Link href="/" style={{ color: '#2563eb', textDecoration: 'underline' }}>view archive</Link>
+          <Link href="/" style={{ color: '#e8401c', textDecoration: 'underline' }}>view archive</Link>
         </div>
       )}
 
       {error && (
-        <div style={{ border: '1px solid #dc2626', color: '#dc2626', padding: '10px 14px', marginBottom: 24, fontSize: 12 }}>
+        <div style={{ border: '1px solid #c0392b', color: '#c0392b', padding: '10px 14px', marginBottom: 24, fontSize: 12 }}>
           {'>'} error: {error}
         </div>
       )}
@@ -113,8 +113,8 @@ export default function AdminPage() {
             width: '100%',
             padding: '12px',
             backgroundColor: 'transparent',
-            color: uploading ? '#6b7280' : '#2563eb',
-            border: `1px solid ${uploading ? '#cccccc' : '#2563eb'}`,
+            color: uploading ? '#888888' : '#e8401c',
+            border: `1px solid ${uploading ? '#ccc8c2' : '#e8401c'}`,
             cursor: uploading ? 'not-allowed' : 'pointer',
             fontSize: 13,
             letterSpacing: '0.05em',

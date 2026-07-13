@@ -15,23 +15,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body style={{ paddingTop: '48px', paddingBottom: '72px', background: '#f2f2f2' }}>
+      <body style={{ paddingTop: '48px', paddingBottom: '72px', background: '#ede9e3' }}>
         <nav style={{
           position: 'fixed',
           top: 0, left: 0, right: 0,
           height: '48px',
-          backgroundColor: '#e8e8e8',
-          borderBottom: '1px solid #cccccc',
+          backgroundColor: '#e4dfd8',
+          borderBottom: '1px solid #ccc8c2',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '0 24px',
           zIndex: 100,
         }}>
-          <Link href="/" style={{ color: '#2563eb', textDecoration: 'none', fontWeight: 700, fontSize: 14, letterSpacing: '0.05em' }}>
+          <Link href="/" style={{ color: '#e8401c', textDecoration: 'none', fontWeight: 700, fontSize: 14, letterSpacing: '0.05em' }}>
             ~/nopremiummusic
           </Link>
-          <Link href="/admin" style={{ color: '#1e3a8a', textDecoration: 'none', fontSize: 13, letterSpacing: '0.05em' }}>
+          <Link href="/admin" style={{ color: '#1a1a1a', textDecoration: 'none', fontSize: 13, letterSpacing: '0.05em' }}>
             [upload]
           </Link>
         </nav>
