@@ -12,19 +12,28 @@ function formatTime(seconds: number): string {
 export default function GlobalPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null)
+  const [playlist, setPlaylist] = useState<Track[]>([])
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
 
   useEffect(() => {
-    const handler = (e: Event) => {
+    const handlePlayTrack = (e: Event) => {
       const track = (e as CustomEvent<{ track: Track }>).detail.track
       setCurrentTrack(track)
       setCurrentTime(0)
       setDuration(0)
     }
-    window.addEventListener('play-track', handler)
-    return () => window.removeEventListener('play-track', handler)
+    const handleSetPlaylist = (e: Event) => {
+      const tracks = (e as CustomEvent<{ tracks: Track[] }>).detail.tracks
+      setPlaylist(tracks)
+    }
+    window.addEventListener('play-track', handlePlayTrack)
+    window.addEventListener('set-playlist', handleSetPlaylist)
+    return () => {
+      window.removeEventListener('play-track', handlePlayTrack)
+      window.removeEventListener('set-playlist', handleSetPlaylist)
+    }
   }, [])
 
   useEffect(() => {
@@ -33,6 +42,16 @@ export default function GlobalPlayer() {
     audioRef.current.load()
     audioRef.current.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false))
   }, [currentTrack])
+
+  function skipToNext() {
+    if (!currentTrack || playlist.length === 0) return
+    const idx = playlist.findIndex(t => t.id === currentTrack.id)
+    if (idx === -1 || idx >= playlist.length - 1) return
+    const next = playlist[idx + 1]
+    setCurrentTrack(next)
+    setCurrentTime(0)
+    setDuration(0)
+  }
 
   function togglePlay() {
     if (!audioRef.current) return
@@ -71,7 +90,7 @@ export default function GlobalPlayer() {
         ref={audioRef}
         onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime ?? 0)}
         onLoadedMetadata={() => setDuration(audioRef.current?.duration ?? 0)}
-        onEnded={() => setIsPlaying(false)}
+        onEnded={skipToNext}
       />
       <div style={{
         position: 'fixed', bottom: 0, left: 0, right: 0,
@@ -85,7 +104,7 @@ export default function GlobalPlayer() {
         zIndex: 50,
         fontFamily: "'Courier New', Courier, monospace",
       }}>
-        {/* Prompt + track info */}
+        {/* Track info */}
         <div style={{ minWidth: 0, flexShrink: 1 }}>
           <div style={{ fontSize: 10, color: '#888888', marginBottom: 2 }}>$ now playing</div>
           <div style={{ fontSize: 12, color: '#1a1a1a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -101,9 +120,10 @@ export default function GlobalPlayer() {
             {isPlaying ? '[⏸]' : '[▶]'}
           </button>
           <button onClick={skipForward} style={{ background: 'none', border: 'none', color: '#888888', cursor: 'pointer', fontSize: 12, padding: '4px 6px' }}>[+10]</button>
+          <button onClick={skipToNext} style={{ background: 'none', border: 'none', color: '#888888', cursor: 'pointer', fontSize: 12, padding: '4px 6px' }}>{'[>>|]'}</button>
         </div>
 
-        {/* Progress */}
+        {/* Progress bar */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 0 }}>
           <span style={{ fontSize: 11, color: '#888888', flexShrink: 0 }}>{formatTime(currentTime)}</span>
           <div onClick={seek} style={{ flex: 1, height: 2, backgroundColor: '#a0a0a0', cursor: 'pointer', position: 'relative' }}>
