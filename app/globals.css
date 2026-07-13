@@ -5,17 +5,19 @@
 }
 
 :root {
-  --swiss-black: #000000;
-  --swiss-white: #ffffff;
-  --swiss-red: #E8401C;
-  --swiss-gray: #767676;
-  --swiss-light-gray: #F0F0F0;
+  --bg: #141414;
+  --surface: #1e1e1e;
+  --border: #2e2e2e;
+  --text: #d4d4d4;
+  --muted: #555555;
+  --green: #4ade80;
+  --red: #f87171;
 }
 
 body {
-  background: var(--swiss-white);
-  color: var(--swiss-black);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -25,6 +27,10 @@ input, select, textarea, button {
 }
 
 ::selection {
-  background: var(--swiss-black);
-  color: var(--swiss-white);
+  background: var(--green);
+  color: #000;
 }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); }

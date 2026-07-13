@@ -12,74 +12,66 @@ function dispatchPlayTrack(track: Track) {
   window.dispatchEvent(new CustomEvent('play-track', { detail: { track } }))
 }
 
-export default function TrackCard({ track }: { track: Track }) {
+export default function TrackCard({ track, index }: { track: Track; index: number }) {
   const coverSrc = track.cover_url || null
+  const num = String(index).padStart(3, '0')
 
   return (
-    <div
-      className="flex items-center gap-4 py-4 border-b border-black"
-      style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-    >
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 16,
+      padding: '12px 0',
+      borderBottom: '1px solid #2e2e2e',
+      fontFamily: "'Courier New', Courier, monospace",
+    }}>
+      {/* Index */}
+      <div style={{ color: '#555', fontSize: 12, flexShrink: 0, width: 32 }}>{num}</div>
+
       {/* Cover */}
-      <div
-        style={{
-          width: 80,
-          height: 80,
-          border: '1px solid #000',
-          flexShrink: 0,
-          backgroundColor: '#000',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {coverSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={coverSrc} alt="cover" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        ) : (
-          <span style={{ fontSize: 28, color: '#fff' }}>♪</span>
-        )}
+      <div style={{
+        width: 48, height: 48,
+        border: '1px solid #2e2e2e',
+        flexShrink: 0,
+        backgroundColor: '#1e1e1e',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        overflow: 'hidden',
+      }}>
+        {coverSrc
+          ? <img src={coverSrc} alt="cover" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          : <span style={{ fontSize: 18, color: '#333' }}>♪</span>
+        }
       </div>
 
-      {/* Track info */}
+      {/* Info */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.03em', fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div style={{ fontSize: 13, color: '#d4d4d4', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {track.title}
         </div>
-        <div style={{ fontSize: 13, marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {track.artist}
+        <div style={{ fontSize: 12, color: '#555', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {track.artist}{track.genre ? ` · ${track.genre}` : ''}{track.year > 0 ? ` · ${track.year}` : ''}
         </div>
-        {(track.genre || track.year > 0) && (
-          <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#767676', marginTop: 4 }}>
-            {[track.genre, track.year > 0 ? track.year : ''].filter(Boolean).join(' · ')}
-          </div>
-        )}
       </div>
 
       {/* Duration + Play */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
         {track.duration > 0 && (
-          <span style={{ fontFamily: 'monospace', fontSize: 12, color: '#767676' }}>
-            {formatTime(track.duration)}
-          </span>
+          <span style={{ fontSize: 12, color: '#555' }}>{formatTime(track.duration)}</span>
         )}
         <button
           onClick={() => dispatchPlayTrack(track)}
           style={{
-            width: 40,
-            height: 40,
-            backgroundColor: '#000',
-            color: '#fff',
-            border: 'none',
+            background: 'none',
+            border: '1px solid #2e2e2e',
+            color: '#4ade80',
             cursor: 'pointer',
-            fontSize: 16,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            fontSize: 13,
+            padding: '6px 12px',
+            letterSpacing: '0.05em',
           }}
           aria-label={`Play ${track.title}`}
         >
-          ▶
+          [▶]
         </button>
       </div>
     </div>

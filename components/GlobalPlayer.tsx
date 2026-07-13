@@ -64,7 +64,6 @@ export default function GlobalPlayer() {
   if (!currentTrack) return null
 
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0
-  const coverSrc = currentTrack.cover_url || null
 
   return (
     <>
@@ -74,55 +73,43 @@ export default function GlobalPlayer() {
         onLoadedMetadata={() => setDuration(audioRef.current?.duration ?? 0)}
         onEnded={() => setIsPlaying(false)}
       />
-      <div
-        style={{ backgroundColor: '#000', color: '#fff', height: '64px' }}
-        className="fixed bottom-0 left-0 right-0 flex items-center px-4 gap-4 z-50"
-      >
-        {/* Cover */}
-        <div
-          style={{ width: 48, height: 48, border: '1px solid #fff', flexShrink: 0, backgroundColor: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          {coverSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={coverSrc} alt="cover" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          ) : (
-            <span style={{ fontSize: 20, color: '#fff' }}>♪</span>
-          )}
-        </div>
-
-        {/* Track info */}
-        <div style={{ minWidth: 0, flexShrink: 1, marginRight: 16 }}>
-          <div style={{ fontWeight: 700, textTransform: 'uppercase', fontSize: 12, letterSpacing: '0.05em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-            {currentTrack.title}
-          </div>
-          <div style={{ fontSize: 11, color: '#767676', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-            {currentTrack.artist}
+      <div style={{
+        position: 'fixed', bottom: 0, left: 0, right: 0,
+        height: '72px',
+        backgroundColor: '#1e1e1e',
+        borderTop: '1px solid #2e2e2e',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0 20px',
+        gap: 16,
+        zIndex: 50,
+        fontFamily: "'Courier New', Courier, monospace",
+      }}>
+        {/* Prompt + track info */}
+        <div style={{ minWidth: 0, flexShrink: 1 }}>
+          <div style={{ fontSize: 10, color: '#555', marginBottom: 2 }}>$ now playing</div>
+          <div style={{ fontSize: 12, color: '#d4d4d4', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <span style={{ color: '#4ade80' }}>{currentTrack.title}</span>
+            <span style={{ color: '#555' }}> — {currentTrack.artist}</span>
           </div>
         </div>
 
         {/* Controls */}
-        <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
-          <button onClick={skipBack} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: 16, padding: '4px 8px' }}>◀◀</button>
-          <button onClick={togglePlay} style={{ background: 'none', border: 'none', color: '#E8401C', cursor: 'pointer', fontSize: 20, padding: '4px 8px' }}>
-            {isPlaying ? '⏸' : '▶'}
+        <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
+          <button onClick={skipBack} style={{ background: 'none', border: 'none', color: '#555', cursor: 'pointer', fontSize: 12, padding: '4px 6px' }}>[-10]</button>
+          <button onClick={togglePlay} style={{ background: 'none', border: '1px solid #2e2e2e', color: '#4ade80', cursor: 'pointer', fontSize: 12, padding: '4px 10px' }}>
+            {isPlaying ? '[⏸]' : '[▶]'}
           </button>
-          <button onClick={skipForward} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: 16, padding: '4px 8px' }}>▶▶</button>
+          <button onClick={skipForward} style={{ background: 'none', border: 'none', color: '#555', cursor: 'pointer', fontSize: 12, padding: '4px 6px' }}>[+10]</button>
         </div>
 
-        {/* Time + progress */}
+        {/* Progress */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 0 }}>
-          <span style={{ fontFamily: 'monospace', fontSize: 11, flexShrink: 0, color: '#767676' }}>
-            {formatTime(currentTime)}
-          </span>
-          <div
-            onClick={seek}
-            style={{ flex: 1, height: 2, backgroundColor: '#333', cursor: 'pointer', position: 'relative' }}
-          >
-            <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#E8401C' }} />
+          <span style={{ fontSize: 11, color: '#555', flexShrink: 0 }}>{formatTime(currentTime)}</span>
+          <div onClick={seek} style={{ flex: 1, height: 2, backgroundColor: '#2e2e2e', cursor: 'pointer', position: 'relative' }}>
+            <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#4ade80' }} />
           </div>
-          <span style={{ fontFamily: 'monospace', fontSize: 11, flexShrink: 0, color: '#767676' }}>
-            {formatTime(duration)}
-          </span>
+          <span style={{ fontSize: 11, color: '#555', flexShrink: 0 }}>{formatTime(duration)}</span>
         </div>
       </div>
     </>

@@ -15,49 +15,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body style={{ paddingTop: '48px', paddingBottom: '64px' }}>
-        {/* Fixed top nav */}
-        <nav
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '48px',
-            backgroundColor: '#000',
-            color: '#fff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 24px',
-            zIndex: 100,
-          }}
-        >
-          <Link
-            href="/"
-            style={{
-              color: '#fff',
-              textDecoration: 'none',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '0.15em',
-              fontSize: 16,
-            }}
-          >
-            NOPREMIUMMUSIC
+      <body style={{ paddingTop: '48px', paddingBottom: '72px', background: '#141414' }}>
+        <nav style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0,
+          height: '48px',
+          backgroundColor: '#1e1e1e',
+          borderBottom: '1px solid #2e2e2e',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0 24px',
+          zIndex: 100,
+        }}>
+          <Link href="/" style={{ color: '#4ade80', textDecoration: 'none', fontWeight: 700, fontSize: 14, letterSpacing: '0.05em' }}>
+            ~/nopremiummusic
           </Link>
-          <Link
-            href="/admin"
-            style={{
-              color: '#fff',
-              textDecoration: 'none',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em',
-              fontSize: 12,
-            }}
-          >
-            UPLOAD
+          <Link href="/admin" style={{ color: '#d4d4d4', textDecoration: 'none', fontSize: 13, letterSpacing: '0.05em' }}>
+            [upload]
           </Link>
         </nav>
 
