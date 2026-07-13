@@ -76,8 +76,8 @@ export default function GlobalPlayer() {
       <div style={{
         position: 'fixed', bottom: 0, left: 0, right: 0,
         height: '72px',
-        backgroundColor: '#1e1e1e',
-        borderTop: '1px solid #2e2e2e',
+        backgroundColor: '#e8e8e8',
+        borderTop: '1px solid #cccccc',
         display: 'flex',
         alignItems: 'center',
         padding: '0 20px',
@@ -87,29 +87,29 @@ export default function GlobalPlayer() {
       }}>
         {/* Prompt + track info */}
         <div style={{ minWidth: 0, flexShrink: 1 }}>
-          <div style={{ fontSize: 10, color: '#555', marginBottom: 2 }}>$ now playing</div>
-          <div style={{ fontSize: 12, color: '#d4d4d4', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-            <span style={{ color: '#4ade80' }}>{currentTrack.title}</span>
-            <span style={{ color: '#555' }}> — {currentTrack.artist}</span>
+          <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 2 }}>$ now playing</div>
+          <div style={{ fontSize: 12, color: '#1e3a8a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <span style={{ color: '#2563eb' }}>{currentTrack.title}</span>
+            <span style={{ color: '#6b7280' }}> — {currentTrack.artist}</span>
           </div>
         </div>
 
         {/* Controls */}
         <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
-          <button onClick={skipBack} style={{ background: 'none', border: 'none', color: '#555', cursor: 'pointer', fontSize: 12, padding: '4px 6px' }}>[-10]</button>
-          <button onClick={togglePlay} style={{ background: 'none', border: '1px solid #2e2e2e', color: '#4ade80', cursor: 'pointer', fontSize: 12, padding: '4px 10px' }}>
+          <button onClick={skipBack} style={{ background: 'none', border: 'none', color: '#6b7280', cursor: 'pointer', fontSize: 12, padding: '4px 6px' }}>[-10]</button>
+          <button onClick={togglePlay} style={{ background: 'none', border: '1px solid #cccccc', color: '#2563eb', cursor: 'pointer', fontSize: 12, padding: '4px 10px' }}>
             {isPlaying ? '[⏸]' : '[▶]'}
           </button>
-          <button onClick={skipForward} style={{ background: 'none', border: 'none', color: '#555', cursor: 'pointer', fontSize: 12, padding: '4px 6px' }}>[+10]</button>
+          <button onClick={skipForward} style={{ background: 'none', border: 'none', color: '#6b7280', cursor: 'pointer', fontSize: 12, padding: '4px 6px' }}>[+10]</button>
         </div>
 
         {/* Progress */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 0 }}>
-          <span style={{ fontSize: 11, color: '#555', flexShrink: 0 }}>{formatTime(currentTime)}</span>
-          <div onClick={seek} style={{ flex: 1, height: 2, backgroundColor: '#2e2e2e', cursor: 'pointer', position: 'relative' }}>
-            <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#4ade80' }} />
+          <span style={{ fontSize: 11, color: '#6b7280', flexShrink: 0 }}>{formatTime(currentTime)}</span>
+          <div onClick={seek} style={{ flex: 1, height: 2, backgroundColor: '#cccccc', cursor: 'pointer', position: 'relative' }}>
+            <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#2563eb' }} />
           </div>
-          <span style={{ fontSize: 11, color: '#555', flexShrink: 0 }}>{formatTime(duration)}</span>
+          <span style={{ fontSize: 11, color: '#6b7280', flexShrink: 0 }}>{formatTime(duration)}</span>
         </div>
       </div>
     </>

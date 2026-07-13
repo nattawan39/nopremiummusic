@@ -18,36 +18,36 @@ export default function HomePage() {
 
   return (
     <main style={{ maxWidth: 860, margin: '0 auto', padding: '40px 24px' }}>
-      <div style={{ borderBottom: '1px solid #2e2e2e', paddingBottom: 24, marginBottom: 32 }}>
-        <div style={{ color: '#555', fontSize: 12, marginBottom: 8 }}>$ ls -la ~/music</div>
+      <div style={{ borderBottom: '1px solid #cccccc', paddingBottom: 24, marginBottom: 32 }}>
+        <div style={{ color: '#6b7280', fontSize: 12, marginBottom: 8 }}>$ ls -la ~/music</div>
         <h1 style={{
           fontSize: 'clamp(3rem, 10vw, 6rem)',
           fontWeight: 700,
           lineHeight: 1.05,
           margin: 0,
-          color: '#4ade80',
+          color: '#2563eb',
           letterSpacing: '-0.01em',
         }}>
           NO<br />PREMIUM<br />MUSIC
         </h1>
         {!loading && (
-          <div style={{ fontSize: 12, color: '#555', marginTop: 12 }}>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 12 }}>
             {tracks.length} file{tracks.length !== 1 ? 's' : ''} found
           </div>
         )}
       </div>
 
       {loading ? (
-        <div style={{ color: '#555', fontSize: 13 }}>loading<span style={{ color: '#4ade80' }}>_</span></div>
+        <div style={{ color: '#6b7280', fontSize: 13 }}>loading<span style={{ color: '#2563eb' }}>_</span></div>
       ) : tracks.length === 0 ? (
         <div style={{ padding: '32px 0' }}>
-          <div style={{ color: '#555', fontSize: 13, marginBottom: 16 }}>
+          <div style={{ color: '#6b7280', fontSize: 13, marginBottom: 16 }}>
             {'>'} no files found. upload your first track.
           </div>
           <Link href="/admin" style={{
             display: 'inline-block',
-            border: '1px solid #2e2e2e',
-            color: '#4ade80',
+            border: '1px solid #cccccc',
+            color: '#2563eb',
             padding: '10px 20px',
             textDecoration: 'none',
             fontSize: 13,
