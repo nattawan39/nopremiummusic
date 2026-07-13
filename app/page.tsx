@@ -55,7 +55,6 @@ export default function HomePage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24, fontFamily: "'Courier New', Courier, monospace" }}>
           <span style={{ fontSize: 12, color: '#888888' }}>sort by year:</span>
           {([
-            { mode: 'default' as SortMode, label: '[upload order]' },
             { mode: 'latest' as SortMode, label: '[latest]' },
             { mode: 'oldest' as SortMode, label: '[oldest]' },
           ]).map(({ mode, label }) => (
