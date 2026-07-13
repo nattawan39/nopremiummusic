@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { upload } from '@vercel/blob/client'
 import Link from 'next/link'
 
 const inputStyle: React.CSSProperties = {
@@ -26,6 +27,7 @@ const labelStyle: React.CSSProperties = {
 export default function AdminPage() {
   const formRef = useRef<HTMLFormElement>(null)
   const [uploading, setUploading] = useState(false)
+  const [progress, setProgress] = useState('')
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
 
@@ -34,9 +36,34 @@ export default function AdminPage() {
     setUploading(true)
     setSuccess(false)
     setError('')
-    const formData = new FormData(e.currentTarget)
+
+    const form = e.currentTarget
+    const title = (form.elements.namedItem('title') as HTMLInputElement).value
+    const artist = (form.elements.namedItem('artist') as HTMLInputElement).value
+    const genre = (form.elements.namedItem('genre') as HTMLInputElement).value
+    const year = parseInt((form.elements.namedItem('year') as HTMLInputElement).value || '0', 10)
+    const audioFile = (form.elements.namedItem('audio') as HTMLInputElement).files?.[0]
+    const coverFile = (form.elements.namedItem('cover') as HTMLInputElement).files?.[0]
+
+    if (!audioFile) { setError('please select an audio file'); setUploading(false); return }
+
     try {
-      const res = await fetch('/api/upload', { method: 'POST', body: formData })
+      setProgress('uploading audio...')
+      const audioBlob = await upload(audioFile.name, audioFile, { access: 'public', handleUploadUrl: '/api/upload-token' })
+
+      let coverUrl = ''
+      if (coverFile) {
+        setProgress('uploading cover...')
+        const coverBlob = await upload(coverFile.name, coverFile, { access: 'public', handleUploadUrl: '/api/upload-token' })
+        coverUrl = coverBlob.url
+      }
+
+      setProgress('saving...')
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, artist, genre, year, audio_url: audioBlob.url, cover_url: coverUrl }),
+      })
       if (!res.ok) {
         const data = await res.json()
         setError(data.error ?? 'upload failed')
@@ -44,10 +71,11 @@ export default function AdminPage() {
         setSuccess(true)
         formRef.current?.reset()
       }
-    } catch {
-      setError('network error. please try again.')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'upload failed')
     } finally {
       setUploading(false)
+      setProgress('')
     }
   }
 
@@ -121,7 +149,7 @@ export default function AdminPage() {
             marginTop: 8,
           }}
         >
-          {uploading ? '> uploading...' : '> [upload track]'}
+          {uploading ? `> ${progress}` : '> [upload track]'}
         </button>
       </form>
     </main>
