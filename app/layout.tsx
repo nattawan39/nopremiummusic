@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import GlobalPlayer from '@/components/GlobalPlayer'
 import Link from 'next/link'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: 'NO PREMIUM MUSIC',
@@ -39,6 +40,7 @@ export default function RootLayout({
         {children}
 
         <GlobalPlayer />
+        <Analytics />
       </body>
     </html>
   )
